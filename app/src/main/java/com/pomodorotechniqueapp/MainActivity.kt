@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var myTimer: CountDownTimer
     private lateinit var progressBar: ProgressBar
     private var isTimeRunning = false
+    private var isPaused = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,10 +30,32 @@ class MainActivity : AppCompatActivity() {
                 title.setText(R.string.keep_going)
                 startTimer()
                 isTimeRunning = true
+                startButton.text = getString(R.string.pause)
+            } else if (isPaused) {
+                title.setText(R.string.keep_going)
+                resumeTimer(remainingTime)
+                isTimeRunning = true
+                isPaused = false
+                startButton.text = getString(R.string.pause)
+            } else {
+                title.setText(R.string.take_pomodoro)
+                pauseTimer()
+                isPaused = true
+                startButton.text = getString(R.string.resume)
             }
         }
         resetTimer.setOnClickListener { resetTime() }
     }
+
+    private fun resumeTimer(remainingTime: Long) {
+        startTimer(remainingTime)
+    }
+
+    private fun pauseTimer() {
+        myTimer.cancel()
+        updateTimer()
+    }
+
     private fun initializeViews() {
         startButton = findViewById(R.id.start_button)
         resetTimer = findViewById(R.id.reset)
