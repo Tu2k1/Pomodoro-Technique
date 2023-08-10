@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Pomodoro Technique App</string>
     <string name="start_button">START</string>
+    <string name="pause">PAUSE</string>
+    <string name="resume">RESUME</string>
     <string name="reset"> <u>Reset</u> </string>
     <string name="take_pomodoro">Take a Pomodoro…</string>
     <string name="keep_going">Keep going…</string>
